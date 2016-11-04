@@ -1,0 +1,59 @@
+// Velocimetro de Automovil
+
+import UIKit
+
+enum Velocidades : Int {
+    
+    case Apagado = 0
+    case velocidadBaja = 20
+    case velocidadMedia = 50
+    case velocidadAlta = 120
+    
+    init( velocidadInicial : Velocidades ) {
+        self = velocidadInicial
+    }
+    
+
+}
+
+class Auto {
+    var velocidad : Velocidades
+    
+    init() {
+        
+        self.velocidad = Velocidades ( velocidadInicial : .Apagado )
+        
+    }
+    
+func cambioDeVelocidad() -> ( actual : Int, velocidadEnCadena : String ){
+    
+    var mensaje = ""
+    
+    let actual = velocidad.rawValue
+    
+    switch velocidad {
+    
+    case .Apagado:
+        velocidad = .velocidadBaja
+        mensaje = "Apagado"
+    case .velocidadBaja:
+        velocidad = .velocidadMedia
+        mensaje = "Velocidad Baja"
+    case .velocidadMedia:
+        velocidad = .velocidadAlta
+        mensaje = "Velocidad Media"
+    default:
+        velocidad = .Apagado
+        mensaje = "Velocidad alta"
+        
+    }
+    return (actual, mensaje)
+    }
+}
+var auto = Auto()
+
+for i in 1...20 {
+    
+    var resultado = auto.cambioDeVelocidad()
+    print("\(i). \(resultado.actual), \(resultado.velocidadEnCadena)")
+}
